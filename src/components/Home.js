@@ -1,18 +1,48 @@
 import styled from 'styled-components'
 import logo from '../assets/images/logo-trackit.png'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { useState } from 'react'
+import axios from 'axios'
+
 
 export default function Home() {
+  const navigate = useNavigate()
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const body = {
+    email: email,
+    password: password,
+  }
+
+  function handleForm(event) {
+    event.preventDefault()
+
+    const promisse = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login', body)
+
+    promisse
+      .then(res => {
+        localStorage.setItem("token", JSON.stringify(res.data.token))
+        console.log(res.data)
+        navigate('/hoje')
+      })
+      .catch(err => {
+        alert('erro, tente novamente')
+      })
+  }
+
   return (
     <HomePage>
       <img src={logo} />
+      <form onSubmit={handleForm}>
       <Inputs>
-        <input placeholder="email" type="text" />
-        <input placeholder="senha" type="text" />
+        <input placeholder="email" type="email" value={email} onChange={event => setEmail(event.target.value)} required />
+
+        <input placeholder="senha" type="password" value={password} onChange={event => setPassword(event.target.value)} required />
       </Inputs>
-      <Button>
+      <Button type="submit">
         <p>Entrar</p>
       </Button>
+      </form>
       <Link to={'/cadastro'}>
         <Registration>Não tem uma conta? Cadastre-se!</Registration>
       </Link>
@@ -30,12 +60,10 @@ const HomePage = styled.div`
 
   img {
     width: 180px;
-    margin-top: 68px;
   }
 `
 
 const Registration = styled.p`
-  font-family: 'Lexend Deca', sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 13.976px;
@@ -69,7 +97,7 @@ const Inputs = styled.div`
   }
 `
 const Button = styled.button`
-  width: 308px;
+  width: 303px;
   height: 45px;
   background: #52b6ff;
   border-radius: 5px;
@@ -80,7 +108,6 @@ const Button = styled.button`
   margin-top: 6px;
 
   p {
-    font-family: 'Lexend Deca', sans-serif;
     font-style: normal;
     font-weight: 400;
     font-size: 21px;
