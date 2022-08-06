@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import Header from './Header'
+import Footer from './Footer'
 
 export default function Habits() {
   const [habits, setHabits] = useState([])
@@ -25,6 +26,7 @@ export default function Habits() {
     <>
       <Header />
       <h1>Tela hábitos</h1>
+      <Footer />
     </>
   )
 }

@@ -4,24 +4,26 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import axios from 'axios'
 
-
 export default function Home() {
   const navigate = useNavigate()
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
   const body = {
     email: email,
-    password: password,
+    password: password
   }
 
   function handleForm(event) {
     event.preventDefault()
 
-    const promisse = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login', body)
+    const promisse = axios.post(
+      'https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login',
+      body
+    )
 
     promisse
       .then(res => {
-        localStorage.setItem("token", JSON.stringify(res.data.token))
+        localStorage.setItem('token', JSON.stringify(res.data.token))
         console.log(res.data)
         navigate('/hoje')
       })
@@ -34,17 +36,33 @@ export default function Home() {
     <HomePage>
       <img src={logo} />
       <form onSubmit={handleForm}>
-      <Inputs>
-        <input placeholder="email" type="email" value={email} onChange={event => setEmail(event.target.value)} required />
+        <Inputs>
+          <input
+            placeholder="email"
+            type="email"
+            value={email}
+            onChange={event => setEmail(event.target.value)}
+            required
+          />
 
-        <input placeholder="senha" type="password" value={password} onChange={event => setPassword(event.target.value)} required />
-      </Inputs>
-      <Button type="submit">
-        <p>Entrar</p>
-      </Button>
+          <input
+            placeholder="senha"
+            type="password"
+            value={password}
+            onChange={event => setPassword(event.target.value)}
+            required
+          />
+        </Inputs>
+        <Button type="submit">
+          <p>Entrar</p>
+        </Button>
       </form>
       <Link to={'/cadastro'}>
         <Registration>Não tem uma conta? Cadastre-se!</Registration>
+      </Link>
+
+      <Link to={'/hoje'}>
+        <button>hábitos</button>
       </Link>
     </HomePage>
   )
@@ -57,9 +75,15 @@ const HomePage = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background-color: white;
 
   img {
     width: 180px;
+  }
+
+  button {
+    width: 303px;
+    height: 45px;
   }
 `
 
@@ -88,7 +112,7 @@ const Inputs = styled.div`
     border-radius: 5px;
   }
 
-  input:placeholder {
+  input::placeholder {
     font-family: 'Lexend Deca', sans-serif;
     font-style: normal;
     font-weight: 400;

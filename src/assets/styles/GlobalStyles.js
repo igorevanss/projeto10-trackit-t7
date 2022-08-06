@@ -15,6 +15,7 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Lexend Deca', sans-serif;
     width: 100%;
     height: 100%;
+    background-color: #F2F2F2;
   }
 
   .root{

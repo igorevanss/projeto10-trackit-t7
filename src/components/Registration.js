@@ -88,6 +88,7 @@ const Registrate = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background-color: #fff;
 
   img {
     width: 180px;
@@ -107,9 +108,10 @@ const Inputs = styled.div`
     background: #ffffff;
     border: 1px solid #d5d5d5;
     border-radius: 5px;
+    padding: 0 11px;
   }
 
-  input:placeholder {
+  input::placeholder {
     font-family: 'Lexend Deca', sans-serif;
     font-style: normal;
     font-weight: 400;
