@@ -4,19 +4,25 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Home from './Home'
 import Registration from './Registration'
 import Habits from './Habits'
+import UserContext from './ContextAPI'
+import { useState } from "react";
 
 export default function App() {
+  const [token, setToken] = useState([]);
+
   return (
     <>
-    <ResetStyle />
-    <GlobalStyle />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/cadastro" element={<Registration />} />
-          <Route path="/hoje" element={<Habits />} />
-        </Routes>
-      </BrowserRouter>
+      <ResetStyle />
+      <GlobalStyle />
+      <UserContext.Provider value={{token, setToken}}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/cadastro" element={<Registration />} />
+            <Route path="/hoje" element={<Habits />} />
+          </Routes>
+        </BrowserRouter>
+      </UserContext.Provider>
     </>
   )
 }

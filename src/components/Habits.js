@@ -1,13 +1,13 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import axios from 'axios'
 import Header from './Header'
 import Footer from './Footer'
+import UserContext from './ContextAPI'
 
 export default function Habits() {
   const [habits, setHabits] = useState([])
-  const tokenSerial = localStorage.getItem('token')
-  const token = JSON.parse(tokenSerial)
   const config = { headers: { authorization: `Bearer ${token}` } }
+  const { token, setToken } = useContext(UserContext)
 
   useEffect(() => {
     console.log(config)

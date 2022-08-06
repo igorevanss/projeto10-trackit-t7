@@ -1,13 +1,15 @@
 import styled from 'styled-components'
 import logo from '../assets/images/logo-trackit.png'
 import { Link, useNavigate } from 'react-router-dom'
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import axios from 'axios'
+import UserContext from './ContextAPI'
 
 export default function Home() {
   const navigate = useNavigate()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const { token, setToken } = useContext(UserContext);
   const body = {
     email: email,
     password: password
@@ -16,21 +18,23 @@ export default function Home() {
   function handleForm(event) {
     event.preventDefault()
 
-    const promisse = axios.post(
-      'https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login',
-      body
-    )
+    // const promisse = axios.post(
+    //   'https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login',
+    //   body
+    // )
 
-    promisse
-      .then(res => {
-        localStorage.setItem('token', JSON.stringify(res.data.token))
-        console.log(res.data)
-        navigate('/hoje')
-      })
-      .catch(err => {
-        alert('erro, tente novamente')
-      })
+    // promisse
+    //   .then(res => {
+    //     setToken(res.data.token)
+    //     console.log(res.data)
+    //     navigate('/hoje')
+    //   })
+    //   .catch(err => {
+    //     alert('erro, tente novamente')
+    //   })
   }
+
+  console.log(token)
 
   return (
     <HomePage>
